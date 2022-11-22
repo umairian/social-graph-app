@@ -2,8 +2,9 @@ const express = require("express");
 const expressLogger = require("express-bunyan-logger");
 const cors = require("cors");
 const router = require("./routes");
+const { connectWithMongoDb } = require("./utils/connection");
 
-require("./models");
+connectWithMongoDb();
 
 process.on("uncaughtException", (e) => {
   console.log(e);
@@ -41,7 +42,6 @@ app.use((req, res) => {
 
 // error handling
 app.use((err, req, res, next) => {
-  // for now log the error and return 500; need to handle it differently in future
   if (res.headersSent) {
     return next(err);
   }

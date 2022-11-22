@@ -22,26 +22,12 @@ var config = convict({
     arg: "port",
   },
   db: {
-    host: {
-      doc: "Database host name/IP",
-      format: String,
-      default: "127.0.0.1",
-    },
-    name: {
-      doc: "Database name",
-      format: String,
-      default: "database_development",
-    },
-    username: {
-      doc: "db user",
-      format: String,
-      default: "root",
-    },
-    password: {
-      doc: "db password",
+    connectionString: {
+      doc: "Connection string to connect with mongodb",
       format: "*",
-      default: null,
-    },
+      default: "",
+      env: "DB_CONNECTION_STRING"
+    }
   },
 });
 
