@@ -4,8 +4,9 @@ const config = require("../config");
 exports.connectWithMongoDb = async function () {
     try {
         await mongoose.connect(config.get("db.connectionString"));
+        console.log("✅ Database connected successfully!")
     } catch (err) {
-        console.log("Connection Failed!");
+        console.log("❌ Database Connection Failed!");
         console.log(err);
     }
 }
