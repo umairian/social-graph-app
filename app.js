@@ -2,6 +2,9 @@ const express = require("express");
 const expressLogger = require("express-bunyan-logger");
 const cors = require("cors");
 const router = require("./routes");
+const { ApolloServer } = require('apollo-server');
+const typeDefs = require("./schema/graphql");
+const resolvers = require("./resolvers");
 const { connectWithMongoDb } = require("./utils/connection");
 
 connectWithMongoDb();
@@ -49,4 +52,9 @@ app.use((err, req, res, next) => {
   return res.status(500).send(err.message);
 });
 
-module.exports = app;
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
+
+module.exports = server;
