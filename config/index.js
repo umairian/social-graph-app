@@ -16,7 +16,7 @@ var config = convict({
   },
   port: {
     doc: "The port to bind.",
-    format: "port",
+    format: Number,
     default: 8080,
     env: "PORT",
     arg: "port",
@@ -28,6 +28,12 @@ var config = convict({
       default: "",
       env: "DB_CONNECTION_STRING"
     }
+  },
+  jwt_secret: {
+    doc: "JWT Secret key",
+    format: String,
+    default: "",
+    env: "JWT_SECRET",
   },
 });
 

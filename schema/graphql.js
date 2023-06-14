@@ -17,10 +17,19 @@ module.exports = gql`
     updatedAt: String 
   }
 
+  type SignUpResponse {
+    user: User
+    token: String
+  }
+
   type Query {
     books: [Book]
     user(_id: String): User
     users: [User]
     # user(id: Int, name: String): User
+  }
+
+  type Mutation {
+    signup(name: String!, email: String!, password: String!, dob: String, profile_url: String): SignUpResponse
   }
 `;

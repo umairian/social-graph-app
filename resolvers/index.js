@@ -42,6 +42,9 @@ const books = [
       //   return users[args.id];
       // }
     },
+    Mutation: {
+      signup: userResolvers.signup
+    }
   };
 
   module.exports = resolvers;
