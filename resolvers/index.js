@@ -1,3 +1,5 @@
+const userResolvers = require("./user");
+
 const books = [
     {
       title: 'Salahuddin Ayyubi',
@@ -33,11 +35,12 @@ const books = [
   const resolvers = {
     Query: {
       books: () => books,
-      users: () => users,
-      user: (parent, args, contextValue, info) => {
-        console.log(args)
-        return users[args.id];
-      }
+      user: userResolvers.getOne,
+      users: userResolvers.getAll,
+      // user: (parent, args, contextValue, info) => {
+      //   console.log(args)
+      //   return users[args.id];
+      // }
     },
   };
 

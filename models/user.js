@@ -15,6 +15,16 @@ const schema = new Schema({
     required: true,
     unique: true
   },
+  password: {
+    type: String,
+    required: true,
+  },
+  dob: {
+    type: Date,
+  },
+  profile_url: {
+    type: String,
+  },
   createdAt: {
     type: Date,
     required: true,

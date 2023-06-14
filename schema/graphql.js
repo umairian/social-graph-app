@@ -7,15 +7,20 @@ module.exports = gql`
   }
 
   type User {
-    id: Int
+    _id: String
     name: String
-    username: String
     email: String
+    password: String
+    dob: String
+    profile_url: String
+    createdAt: String
+    updatedAt: String 
   }
 
   type Query {
     books: [Book]
+    user(_id: String): User
     users: [User]
-    user(id: Int): User
+    # user(id: Int, name: String): User
   }
 `;

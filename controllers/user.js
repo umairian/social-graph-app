@@ -1,4 +1,4 @@
-const Users = require("../models/users");
+const Users = require("../models/user");
 
 module.exports = {
   get: async (req, res) => {
@@ -9,5 +9,6 @@ module.exports = {
       console.log(err);
       return res.status(err.status || 500).message(err.message || "Something went wrong...");
     }
-  }
+  },
+  
 };
