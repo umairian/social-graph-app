@@ -23,6 +23,7 @@
   "license": "ISC",
   "homepage": "repo_url#readme",
   "dependencies": {
+    "@graphql-tools/merge": "^9.0.0",
     "apollo-server": "^3.11.1",
     "bcryptjs": "^2.4.3",
     "bunyan": "^1.8.15",

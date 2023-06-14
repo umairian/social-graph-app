@@ -1,9 +1,8 @@
 const express = require("express");
 const expressLogger = require("express-bunyan-logger");
 const cors = require("cors");
-const router = require("./routes");
 const { ApolloServer } = require('apollo-server');
-const typeDefs = require("./schema/graphql");
+const typeDefs = require("./schema");
 const resolvers = require("./resolvers");
 const { connectWithMongoDb } = require("./utils/connection");
 
@@ -36,7 +35,6 @@ app.use(
 app.use(cors());
 
 // routes
-app.use("/api", router);
 
 // catch 404 later
 app.use((req, res) => {
