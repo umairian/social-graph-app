@@ -25,5 +25,6 @@ module.exports = gql`
 
   type Mutation {
     signup(name: String!, email: String!, password: String!, dob: String, profile_url: String): SignUpResponse
+    login(email: String!, password: String!): SignUpResponse
   }
 `;

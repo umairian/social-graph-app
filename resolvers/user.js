@@ -6,7 +6,8 @@ const resolvers = {
       users: controllers.getAll,
     },
     Mutation: {
-      signup: controllers.signup
+      signup: controllers.signup,
+      login: controllers.login
     }
   };
 
