@@ -1,10 +1,13 @@
-const express = require("express");
-const expressLogger = require("express-bunyan-logger");
-const cors = require("cors");
-const { ApolloServer } = require('apollo-server');
-const typeDefs = require("./schema");
-const resolvers = require("./resolvers");
-const { connectWithMongoDb } = require("./utils/connection");
+import express from "express";
+import expressLogger from "express-bunyan-logger";
+import cors from "cors";
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer'
+import typeDefs from "./schema/index.js";
+import resolvers from "./resolvers/index.js";
+import http from "http";
+import { connectWithMongoDb } from "./utils/connection.js";
 
 connectWithMongoDb();
 
@@ -36,6 +39,20 @@ app.use(cors());
 
 // routes
 
+const httpServer = http.createServer(app);
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+});
+  
+await server.start();
+
+app.use(
+  expressMiddleware(server),
+);
+
 // catch 404 later
 app.use((req, res) => {
   return res.status(404).send("Error 404, Route not found");
@@ -50,9 +67,4 @@ app.use((err, req, res, next) => {
   return res.status(500).send(err.message);
 });
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-});
-
-module.exports = server;
+export default httpServer;
