@@ -44,7 +44,7 @@ const httpServer = http.createServer(app);
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+  plugins: [ApolloServerPluginDrainHttpServer({ httpServer, defaultMaxAge: 0 })],
 });
   
 await server.start();
