@@ -17,6 +17,11 @@ const connectedUsers = {};
 io.on("connection", (socket) => {
   console.log("socket");
   
+  // Handle client authentication
+  socket.on('authenticate', (userId) => {
+    console.log(`User authenticated: ${userId}`);
+    connectedUsers[userId] = socket; // Associate the user ID with the socket object
+  });
   
   socket.on('message', async (data) => {
     const { sender, recipient, content } = data;
@@ -32,7 +37,8 @@ io.on("connection", (socket) => {
 
     if (recipient in connectedUsers) {
       // Emit the message to the recipient client
-      connectedUsers[recipient].emit('message', { sender, content });
+      console.log("MESSAGEE SENT!")
+      connectedUsers[recipient].emit('message', { sender, content, recipient });
     } else {
       console.log(`Recipient ${recipient} is not connected.`);
       // Handle the case when the recipient is not connected
