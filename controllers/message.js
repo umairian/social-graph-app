@@ -11,8 +11,31 @@ module.exports = {
       console.log("THISSS")
       console.log(sender, recipient)
       const messages = await Messages.find({
-        sender: Types.ObjectId(sender),
-        recipient: Types.ObjectId(recipient)
+        $or: [
+          {
+            sender: Types.ObjectId(sender),
+            recipient: Types.ObjectId(recipient)
+          },
+          {
+            sender: Types.ObjectId(recipient),
+            recipient: Types.ObjectId(sender)
+          }
+        ]
+      });
+      return messages;
+    } catch (err) {
+      console.log(err);
+      return new Error("Something went wrong!");
+    }
+  },
+  sendMessage: async (parent, args, contextValue, info) => {
+    try {
+      const { sender, recipient, content } = args;
+      const messages = await Messages.create({
+        _id: Types.ObjectId(),
+        recipient,
+        sender,
+        content
       });
       return messages;
     } catch (err) {
