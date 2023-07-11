@@ -14,4 +14,7 @@ type Message {
   type Query {
     messages(sender: String!, recipient: String!): [Message]
   }
+  type Mutation {
+    sendMessage(recipient: String!, sender: String!, content: String!): Message
+  }
 `;
